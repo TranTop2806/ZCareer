@@ -14,6 +14,18 @@ export const register = async (req, res) => {
                 message: "Some fields are missing." 
             });
         };
+
+        let profilePhotoUrl;
+        const file = req.file;
+
+        if (file) {
+            const fileUri = getDataUri(file);
+            const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+            profilePhotoUrl = cloudResponse.secure_url;
+        } else {
+            profilePhotoUrl = 'https://github.com/shadcn.png'; 
+        }
+
         const user = await User.findOne({email});
         if (user){
             return res.status(400).json({
@@ -28,6 +40,9 @@ export const register = async (req, res) => {
             phoneNumber,
             password: hashedPassword,
             role,
+            profile: {
+                profilePhoto: profilePhotoUrl,
+            }
         });
 
         return res.status(201).json({
@@ -72,6 +87,7 @@ export const login = async (req, res) => {
         };
         const tokenData = {
             userId: user._id,
+            role: user.role,
         };
         const token = await jwt.sign(tokenData, process.env.SECRET_KEY, {expiresIn: "1d"});
         
@@ -85,7 +101,7 @@ export const login = async (req, res) => {
         }
 
         return res.status(200).cookie("token", token, {maxAge: 1*24*60*60*1000, httpOnly: true, sameSite:'strict'}).json({
-            message: `Login successful. Welcome back ${user.fullname}!`,
+            message: `Welcome back ${user.fullname}!`,
             user,
             success: true,
         });
@@ -110,19 +126,20 @@ export const updateProfile = async (req, res) => {
     try {
         const {fullname, email, phoneNumber, bio, skills} = req.body;        
         const file = req.file;
-        // cloudinary  
-        const fileUri = getDataUri(file);
         let cloudResponse;
-        try {
-            cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-        } catch (error) {
-            return res.status(500).json({
-                message: "Failed to upload file to Cloudinary.",
-                success: false,
-                error: error.message,
-            });
+        // cloudinary  
+        if (file) {
+            const fileUri = getDataUri(file);
+            try {
+                cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+            } catch (error) {
+                return res.status(500).json({
+                    message: "Failed to upload file to Cloudinary.",
+                    success: false,
+                    error: error.message,
+                });
+            }
         }
-        
 
         let skillsArray;  
         if (skills){

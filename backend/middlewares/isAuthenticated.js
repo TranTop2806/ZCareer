@@ -18,7 +18,8 @@ const isAuthenticated = async (req, res, next) => {
             });
         }
         req.id = decoded.userId;
-        // console.log(`Decoded User ID: ${decoded.userID}`); 
+        req.role = decoded.role; 
+
         next();
     } catch (error) {
         return res.status(401).json({

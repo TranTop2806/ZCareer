@@ -1,11 +1,12 @@
 import { Job } from '../models/job.model.js';
-// admin k liye
+// admin
 export const postJob = async (req, res) => {
     try {
         const {title, description, requirements, salary, location, jobType, experience, position, companyId} = req.body;
         const userId = req.id;
-        const descriptionExists = await Job.findOne({description});
-        if (descriptionExists){
+        const jobExists = await Job.findOne({title,description,jobType,position});
+        
+        if (jobExists){
             return res.status(400).json({
                 message: "Job already exists.",
                 success: false,
@@ -20,7 +21,7 @@ export const postJob = async (req, res) => {
         const job = await Job.create({
             title,
             description,
-            requirements: requirements.split(","),
+            requirements: requirements.split(";").map(req => req.trim()),
             salary: Number(salary),
             location,
             jobType,
@@ -38,7 +39,7 @@ export const postJob = async (req, res) => {
         console.log(error);        
     }
 }
-// student k liye
+// student 
 export const getAllJobs = async (req, res) => {
     try {
         const keyword = req.query.keyword || "";
@@ -69,7 +70,9 @@ export const getAllJobs = async (req, res) => {
 export const getJobById = async (req, res) => {
     try {
         const JobId = req.params.id;
-        const job = await Job.findById(JobId);
+        const job = await Job.findById(JobId).populate({
+            path: 'applications',
+        });
         if (!job){
             return res.status(404).json({
                 message: "Job not found.",
@@ -84,11 +87,14 @@ export const getJobById = async (req, res) => {
         console.log(error);        
     }
 }
-//admin kitne job create kra hai abhi tk
+//admin 
 export const getAdminJobs = async (req, res) => {
     try {
         const adminId = req.id;
-        const jobs = await Job.find({created_by: adminId});
+        const jobs = await Job.find({created_by: adminId}).populate({
+            path: 'company',
+            createdAt: -1,
+        });
         if (!jobs){
             return res.status(404).json({
                 message: "Jobs not found.",
