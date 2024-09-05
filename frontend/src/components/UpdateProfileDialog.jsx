@@ -19,7 +19,7 @@ const UpdateProfileDialog = ({open, setOpen}) => {
         email: user?.email || '',
         phoneNumber: user?.phoneNumber || '',
         bio: user?.profile?.bio || '',
-        skills: user?.profile?.skills.map(skill=>skill) || '',
+        skills: user?.profile?.skills.join(', ') || '',
         file: user?.profile?.resume || '',
     });
 
@@ -43,6 +43,10 @@ const UpdateProfileDialog = ({open, setOpen}) => {
         formData.append('skills', input.skills);
         if (input.file) {
             formData.append('file', input.file);
+        }
+        if (input.phoneNumber.length !== 10 || !/^0\d{9}$/.test(input.phoneNumber)) {
+            toast.error('Phone number must be 10 digits and start with 0');
+            return;
         }
         try {
             setLoading(true);

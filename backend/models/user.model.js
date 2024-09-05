@@ -13,8 +13,16 @@ const userSchema = mongoose.Schema({
         unique: true
     },
     phoneNumber: {
-        type: Number,
+        type: String,
         required: true,
+        validate: {
+            validator: function(v) {
+                // Kiểm tra số điện thoại phải là chuỗi 10 chữ số và bắt đầu bằng số 0
+                return /^0\d{9}$/.test(v);
+            },
+            message: props => `${props.value} is not a valid phone number!`
+        },
+        maxLength: 10
     },
     password: {
         type: String,

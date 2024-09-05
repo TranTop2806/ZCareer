@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './App.css'
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import Home from './components/Home';
@@ -14,6 +13,7 @@ import AdminJobs from './components/admin/AdminJobs';
 import PostJob from './components/admin/PostJob';
 import Applicants from './components/admin/Applicants';
 import ProtectedRoute from './components/admin/ProtectedRoute';
+import AdminJobEdit from './components/admin/AdminJobEdit';
 
 
 
@@ -70,6 +70,10 @@ const appRouter = createBrowserRouter([
   {
     path: '/admin/jobs/:id/applicants',
     element:<ProtectedRoute><Applicants/></ProtectedRoute>
+  }, 
+  {
+    path: '/admin/job/:id/edit',
+    element:<ProtectedRoute><AdminJobEdit/></ProtectedRoute>
   }, 
 
 

@@ -42,6 +42,10 @@ const Signup = () => {
     if (input.file) {
         formData.append("file", input.file);
     }
+    if (input.password !== input.confirmPassword) {
+        toast.error("Password and confirm password must be same");
+        return;
+    }
     try {
         dispath(setLoading(true));
         const res = await axios.post(`${USER_API_END_POINT}/register`, formData,{
@@ -49,11 +53,12 @@ const Signup = () => {
                 "Content-Type": "multipart/form-data",
             },
             withCredentials: true,
-        });
+        });        
         if (res.data.success) {
             navigate("/login");
             toast.success(res.data.message);
         }
+        
     } catch (error) {
         console.log(error);
         toast.error(error.response.data.message);

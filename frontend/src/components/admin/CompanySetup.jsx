@@ -93,7 +93,7 @@ const CompanySetup = () => {
                             
                         </Button>
                         <Avatar>
-                            <AvatarImage src={singleCompany.logo || "https://www.shutterstock.com/image-vector/circle-line-simple-design-logo-600nw-2174926871.jpg"} />
+                            <AvatarImage src={singleCompany.logo || "../../../public/favicon.png"} />
                         </Avatar>
                         <h1 className='font-bold text-xl'>{singleCompany.name} Setup</h1>
                     </div>

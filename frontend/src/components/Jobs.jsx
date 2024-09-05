@@ -2,14 +2,19 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./shared/Navbar";
 import FilterCard from "./FilterCard";
 import Job from "./Job";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { Input } from "./ui/input";
+import useGetAllJobs from "@/hooks/useGetAllJobs";
+import { setSearchJobByText } from "@/redux/jobSlice";
 
 
 const Jobs = () => {
+    // useGetAllJobs();
+    const [input, setInput] = useState('');
     const { allJobs, searchedQuery } = useSelector((store) => store.job);
     const [filterJobs, setFilterJobs] = useState(allJobs);
-
+    const dispatch = useDispatch();
     const parseSalaryRange = (salaryQuery) => {
         // Remove 'M' and split the range
         const range = salaryQuery.replace('M', '').split('-');
@@ -17,7 +22,9 @@ const Jobs = () => {
         const maxSalary = parseFloat(range[1]) * 1000000;
         return { minSalary, maxSalary };
     };
-
+    // useEffect(() => {
+    //     dispatch(setSearchJobByText(input));
+    // }, [input]);
     useEffect(() => {
         if (searchedQuery) {
             console.log(searchedQuery);
@@ -50,6 +57,11 @@ const Jobs = () => {
         <div>
             <Navbar />
             <div className="max-w-7xl mx-auto mt-5">
+                <Input
+                        className='w-fit justify-center mb-5 space-between' 
+                        placeholder='Filter by company name' 
+                        onChange={(e) => setInput(e.target.value)}    
+                />
                 <div className="flex gap-5">
                     <div className="w-20%">
                         <FilterCard />
