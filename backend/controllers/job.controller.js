@@ -12,7 +12,7 @@ export const postJob = async (req, res) => {
                 success: false,
             });
         }
-        if (!title || !description || !requirements || !location || !jobType || !experience  || !companyId){
+        if (!title || !description || !requirements || !salary|| !location || !jobType || !experience  || !companyId){
             return res.status(400).json({
                 message: "Something is missing.",
                 success: false,
@@ -139,7 +139,7 @@ export const updateJob = async (req, res) => {
         const jobId = req.params.id;
         const {title, description, requirements, salary, location, jobType, experience, position, companyId} = req.body;
         const userId = req.id;
-        if (!title || !description || !requirements || !location || !jobType || !experience  || !companyId){
+        if (!title || !description || !requirements || !location || !salary || !jobType || !experience  || !companyId){
             return res.status(400).json({
                 message: "Something is missing.",
                 success: false,

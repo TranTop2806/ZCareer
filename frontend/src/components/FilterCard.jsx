@@ -15,7 +15,7 @@ const filterData = [
     },
     {
         filterType: 'Salary',
-        array: ['Negotiable','0-5M', '5-10M', '10-20M', '20-40M', '>40M'],
+        array: ['Negotiable','0-5M', '5-10M', '10-20M', '20-40M', '40-60M', '60-80M', '80-100M'],
     },
 ];
 const FilterCard = () => {

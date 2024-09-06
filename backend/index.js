@@ -11,14 +11,6 @@ import path from 'path';
 dotenv.config({});
 
 const app = express();
-app.get('/home', (req, res) => {
-    return res.status(200).json({ 
-        message: 'Hello World!',
-        success: true
-    });
-
-});
-
 const __dirname = path.resolve();
 console.log(__dirname);
 

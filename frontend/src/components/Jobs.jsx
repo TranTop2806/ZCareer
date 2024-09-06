@@ -11,21 +11,17 @@ import Footer from "./shared/Footer";
 
 
 const Jobs = () => {
-    // useGetAllJobs();
     const [input, setInput] = useState('');
     const { allJobs, searchedQuery } = useSelector((store) => store.job);
     const [filterJobs, setFilterJobs] = useState(allJobs);
     const dispatch = useDispatch();
     const parseSalaryRange = (salaryQuery) => {
-        // Remove 'M' and split the range
         const range = salaryQuery.replace('M', '').split('-');
         const minSalary = parseFloat(range[0]) * 1000000;
         const maxSalary = parseFloat(range[1]) * 1000000;
         return { minSalary, maxSalary };
     };
-    // useEffect(() => {
-    //     dispatch(setSearchJobByText(input));
-    // }, [input]);
+
     useEffect(() => {
         if (searchedQuery) {
             console.log(searchedQuery);
@@ -40,11 +36,16 @@ const Jobs = () => {
                 // Check if the query is in a salary range format (e.g., "7-15M")
                 if (searchedQuery.includes('-') && searchedQuery.toLowerCase().includes('m')) {
                     const { minSalary, maxSalary } = parseSalaryRange(searchedQuery);
-                    matchesSalary = job.salary >= minSalary && job.salary <= maxSalary;
+                
+                    if (job.salary && job.salary !== "0" && job.salary !== null) {
+                        const jobSalary = parseFloat(job.salary.replace(/[^\d]/g, '')); // Chuyển chuỗi salary về số nếu có giá trị
+                        matchesSalary = jobSalary >= minSalary && jobSalary <= maxSalary;
+                    }
                 } else {
-                    matchesSalary = job.salary.toString().includes(searchedQuery);
+                    // Nếu `salary` là `null` hoặc `"0"`, không cần so sánh salary
+                    matchesSalary = job.salary && job.salary !== "0" && job.salary !== null && job.salary.includes(searchedQuery);
                 }
-
+                
                 return matchesTitle || matchesDescription || matchesLocation || matchesSalary;
             });
             
@@ -58,11 +59,11 @@ const Jobs = () => {
         <div>
             <Navbar />
             <div className="max-w-7xl mx-auto mt-5">
-                <Input
+                {/* <Input
                         className='w-fit justify-center mb-5 space-between' 
-                        placeholder='Filter by company name' 
+                        placeholder='Filter by job name' 
                         onChange={(e) => setInput(e.target.value)}    
-                />
+                /> */}
                 <div className="flex gap-5">
                     <div className="w-20%">
                         <FilterCard />
