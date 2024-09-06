@@ -30,9 +30,9 @@ const Job = ({ job }) => {
                     </Avatar>
                 </Button>
                 <div>
-                    <h1 className='font-medium text-lg truncate'>{job?.company?.name}</h1>
+                    <h1 className='font-medium text-lg truncate line-clamp-1'>{job?.company?.name}</h1>
                     <p className='text-sm text-gray-500'>{job?.company?.location}</p>
-                </div>
+                </div>  
             </div>
 
             <div>

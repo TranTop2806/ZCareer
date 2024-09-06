@@ -7,6 +7,7 @@ import userRoutes from './routes/user.route.js';
 import companyRoutes from './routes/company.route.js';
 import jobRoutes from './routes/job.route.js';
 import applicationsRoutes from './routes/application.route.js';
+import path from 'path';
 dotenv.config({});
 
 const app = express();
@@ -17,6 +18,9 @@ app.get('/home', (req, res) => {
     });
 
 });
+
+const __dirname = path.resolve();
+console.log(__dirname);
 
 
 //middeleware
@@ -37,6 +41,13 @@ app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/company', companyRoutes);
 app.use('/api/v1/job', jobRoutes);
 app.use('/api/v1/application', applicationsRoutes);
+
+
+app.use(express.static(path.join(__dirname, '/frontend/dist')));
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
+});
+
 
 app.listen(PORT, () => {
     connectDB();

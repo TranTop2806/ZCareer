@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Input } from "./ui/input";
 import useGetAllJobs from "@/hooks/useGetAllJobs";
 import { setSearchJobByText } from "@/redux/jobSlice";
+import Footer from "./shared/Footer";
 
 
 const Jobs = () => {
@@ -87,6 +88,7 @@ const Jobs = () => {
                     )}
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };
