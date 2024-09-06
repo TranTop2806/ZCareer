@@ -7,15 +7,15 @@ import { setSearchedQuery } from '@/redux/jobSlice';
 const filterData = [
     {
         filterType: 'Location',
-        array: ['Ho Chi Minh', 'Ha Noi', 'Da Nang', 'Binh Duong', 'Vung Tau'],
+        array: ['Hồ Chí Minh', 'Hà Nội', 'Đà Nẵng', 'Bình Dương', 'Vũng Tàu'],
     },
     {
         filterType: 'Industry',
-        array: ['Frontend', 'Backend', 'Fullstack', 'Mobile', 'DevOps'],
+        array: ['Frontend', 'Backend', 'Fullstack', 'Mobile', 'DevOps', 'Testing', 'UI/UX', 'Data Science', 'AI/ML'],
     },
     {
         filterType: 'Salary',
-        array: ['Negotiable','0-5M', '5-10M', '10-20M', '20-40M', '40-60M', '60-80M', '80-100M'],
+        array: ['Negotiable','0-500$', '500-1000$', '1000-2000$', '2000-4000$', '4000-6000$', '6000-8000$', '8000-10000$'],
     },
 ];
 const FilterCard = () => {

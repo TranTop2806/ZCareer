@@ -104,14 +104,14 @@ const PostJob = () => {
                             />
                         </div>
                         <div>
-                            <Label>Salary</Label>
+                            <Label>Salary ($)</Label>
                             <Input 
                                 type= 'text'
                                 name='salary'
                                 value={input.salary}
                                 onChange={changeEventHandler}
                                 className='focus-visible:ring-offset-0 focus-visible:ring-0 my-1'
-                                placeholder='10000000'
+                                placeholder='1000, 2000, etc.'
                             />
                         </div>
                         <div>
@@ -137,7 +137,7 @@ const PostJob = () => {
                             />
                         </div>
                         <div>
-                            <Label>Experience Level</Label>
+                            <Label>Experience Level (Years) </Label>
                             <Input 
                                 type= 'text'
                                 name='experience'

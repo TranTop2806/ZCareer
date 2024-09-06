@@ -22,7 +22,7 @@ export const postJob = async (req, res) => {
             title,
             description,
             requirements: requirements.split(";").map(req => req.trim()),
-            salary: Number(salary),
+            salary : salary.trim().toLowerCase(),
             location,
             jobType,
             experienceLevel: experience,
@@ -145,7 +145,17 @@ export const updateJob = async (req, res) => {
                 success: false,
             });
         }
-        const updateJob = {title, description, requirements, salary, location, jobType, experience, position, companyId, userId};
+        const updateJob = {
+            title, 
+            description, 
+            requirements, 
+            salary : salary.trim().toLowerCase(), 
+            location, 
+            jobType, 
+            experience, 
+            position, 
+            companyId, 
+            userId};
         const job = await Job.findByIdAndUpdate(jobId, updateJob, {new: true});
         if (!job){
             return res.status(404).json({

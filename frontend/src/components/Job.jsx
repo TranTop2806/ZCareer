@@ -44,7 +44,7 @@ const Job = ({ job }) => {
                 <Badge className='text-blue-700 font-bold' variant='ghost'>{job?.location}</Badge>
                 <Badge className='text-[#F83002] font-bold' variant='ghost'>{job?.jobType}</Badge>
                 {
-                    (job?.salary === "0" || job?.salary === null)? "" : <Badge className='text-[#7209b7] font-bold' variant='ghost'>{job?.salary}VNĐ</Badge>
+                    (job?.salary === "0" || job?.salary === null)? "" : <Badge className='text-[#7209b7] font-bold' variant='ghost'>{job?.salary}$</Badge>
                 }
                 
             </div>

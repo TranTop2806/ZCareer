@@ -30,8 +30,8 @@ const Navbar = () => {
 
     return (
         <div className='bg-[#e8e5ec7e] sticky top-0 z-50'>
-            <div className='flex items-center justify-between mx-auto max-w-7xl h-16'>
-                <div>
+            <div className='flex items-center justify-between mx-auto max-w-7xl h-16 px-0 md:px-7 sm:px-6 lg:px-8 '>
+                <div className='logo'>
                     <h1 className='text-2xl font-bold flex items-center'>
                         <Link to={'/'} className="flex items-center">
                             <img className='w-8 h-8"' src="../public/favicon.png" alt="" />

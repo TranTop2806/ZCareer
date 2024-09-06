@@ -37,7 +37,8 @@ export default [
       'react/jsx-no-undef': 'off',
       "react/jsx-key": "off",
       "react/prop-types": 0,
-      "react-hooks/exhaustive-deps": 'off'
+      "react-hooks/exhaustive-deps": 'off',
+      "react/un-defined": 'off',
     },
   },
 ]

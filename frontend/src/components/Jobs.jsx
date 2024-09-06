@@ -16,9 +16,9 @@ const Jobs = () => {
     const [filterJobs, setFilterJobs] = useState(allJobs);
     const dispatch = useDispatch();
     const parseSalaryRange = (salaryQuery) => {
-        const range = salaryQuery.replace('M', '').split('-');
-        const minSalary = parseFloat(range[0]) * 1000000;
-        const maxSalary = parseFloat(range[1]) * 1000000;
+        const range = salaryQuery.replace('$', '').split('-');
+        const minSalary = parseFloat(range[0]);
+        const maxSalary = parseFloat(range[1]);
         return { minSalary, maxSalary };
     };
 
@@ -34,7 +34,7 @@ const Jobs = () => {
                 let matchesSalary = false;
                 
                 // Check if the query is in a salary range format (e.g., "7-15M")
-                if (searchedQuery.includes('-') && searchedQuery.toLowerCase().includes('m')) {
+                if (searchedQuery.includes('-') && searchedQuery.toLowerCase().includes('$')) {
                     const { minSalary, maxSalary } = parseSalaryRange(searchedQuery);
                 
                     if (job.salary && job.salary !== "0" && job.salary !== null) {
