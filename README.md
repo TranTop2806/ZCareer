@@ -3,10 +3,20 @@
 Welcome to the ZCAREER project! This README file will provide you with an overview of the project and guide you on how to get started.
 
 ## Table of Contents
+- [Demo](#demo)
 - [Introduction](#introduction)
 - [Installation](#installation)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Demo
+![ZCAREER](./assets/demo.gif)
+
+![ZCAREER](./assets/demo1.png)
+![ZCAREER](./assets/demo2.png)
+![ZCAREER](./assets/demo3.png)
+![ZCAREER](./assets/demo4.png)
+![ZCAREER](./assets/demo5.png)
 
 ## Introduction
 ZCAREER is a project aimed at helping individuals in their career development journey. Whether you are a student, a professional, or someone looking to switch careers, ZCAREER provides resources and tools to assist you in achieving your career goals.
